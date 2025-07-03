@@ -1,0 +1,138 @@
+MCP Capabilities – Simplified Explanation
+MCP defines four primary capability types that govern how Clients (like apps) and Servers (like backends or agents) interact through LLMs. These primitives work together to enable intelligent and safe workflows.
+
+Main Core 4 Features:-
+1.Prompt
+2.Resources
+3.Tools
+4.Sampling
+
+1. Prompts
+Definition:
+Predefined templates or workflows that guide how the LLM should respond.
+
+Controlled by: User
+Direction: Server → Client
+Side Effects: None
+Approval Needed: No (user-initiated)
+Use Cases:
+
+Code reviews
+
+Guided conversations
+
+Domain-specific tasks
+
+Example:
+
+def code_review(code: str, language: str) -> list:
+    return [
+        {
+            "role": "system",
+            "content": f"You are a reviewer for {language}. Point out improvements."
+        },
+        {
+            "role": "user",
+            "content": f"Review this code:\n```{language}\n{code}\n```"
+        }
+    ]
+
+2. Resources
+Definition:
+Read-only data sources that provide static or contextual information to the LLM.
+
+Controlled by: Application (host)
+Direction: Client → Server
+Side Effects: No
+Approval Needed: Typically no
+Use Cases:
+
+File reading
+
+Config access
+
+Metadata fetching
+
+Example:
+
+function readFile(filePath) {
+    const fs = require('fs');
+    return new Promise((resolve, reject) => {
+        fs.readFile(filePath, 'utf8', (err, data) => {
+            if (err) reject(err);
+            else resolve(data);
+        });
+    });
+}
+
+3. Tools
+Definition:
+Executable functions or actions that the LLM can call to perform operations with potential side effects.
+
+Controlled by: Model (LLM)
+Direction: Client → Server
+Side Effects: Yes (external actions)
+Approval Needed: Yes
+Use Cases:
+
+Sending messages
+
+Triggering APIs
+
+Performing calculations
+
+Example:
+
+
+function getWeather(location) {
+    return {
+        temperature: 72,
+        conditions: 'Sunny',
+        humidity: 45
+    };
+}
+
+4. Sampling
+Definition:
+A mechanism where the Server requests the Client to perform an LLM interaction.
+
+Controlled by: Server
+Direction: Server → Client → Server
+Side Effects: Indirect (via LLM output)
+Approval Needed: Yes
+Use Cases:
+
+Recursive AI workflows
+
+Multi-step agent actions
+
+Analysis or planning steps
+
+Example:
+
+
+function handleSamplingRequest(request) {
+    const { messages, systemPrompt } = request;
+    return {
+        role: 'assistant',
+        content: 'Response to the sampling request...'
+    };
+}
+Summary Table
+Capability	Controlled By	Direction	Side Effects	Approval Needed	Typical Use Cases
+Prompts	User	Server → Client	No	No	Guided workflows, templates
+Resources	Application	Client → Server	No	Typically no	Data retrieval, file reading
+Tools	LLM (Model)	Client → Server	Yes	Yes	Actions, API calls
+Sampling	Server	Server → Client → Server	Indirect	Yes	Multi-step reasoning, planning
+Sampling	Server	Server → Client → Server	Indirect	Yes	Multi-step reasoning, planning
+
+
+Capability Flow Example
+Prompt sets the goal (e.g. "make a website")
+
+Resources provide existing info (e.g. user’s config or files)
+
+LLM uses Tools to perform actions (e.g. call a website generator)
+C:\Users\Pc\Desktop\Pages
+
+If needed, Sampling is used by Server to re-query the LLM for complex reasoning

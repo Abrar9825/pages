@@ -1,0 +1,25 @@
+Unit 1: Introduction to Model Context Protocol (MCP)
+
+Why MCP Matters:--
+
+Current Limitation: LLMs can’t access real-time info or external tools directly.
+
+MCP’s Role: Acts as a bridge between models and external data sources or environments.
+
+Goal: Let models become interactive, context-aware, and more useful in real-world scenarios.
+
+🧩 What Will Be Covered in Detail
+What is MCP?
+– Definition and its role in modern AI.
+
+Key Concepts & Terminology
+– Such as roles, tools, memory, and schemas (coming up in later units too).
+
+Integration Challenges
+– Especially the M×N Problem (when multiple models/tools need to connect in a scalable way).
+
+Benefits and Goals
+– Like standardization, scalability, and interoperability.
+
+Simple Integration Example
+– To help you visualize how MCP looks in practice.

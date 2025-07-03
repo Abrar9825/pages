@@ -1,0 +1,38 @@
+Unit 3: MCP Communication Protocol
+
+Core Protocol Format
+MCP uses JSON-RPC 2.0 as its foundational message structure.
+
+✅ Key Features:
+Text-based (JSON) and human-readable
+
+Works across programming languages (language-agnostic)
+
+Well-documented and widely supported
+
+💬 Message Types in MCP
+
+| **Type**         | **Direction**             | **Purpose**                                            | **Requires Response?** |
+| ---------------- | ------------------------- | ------------------------------------------------------ | ---------------------- |
+| **Request**      | Client → Server           | Triggers a method on the Server                        | ✅ Yes                  |
+| **Response**     | Server → Client           | Returns result or error to a specific request          | ❌ (Only in response)   |
+| **Notification** | Server → Client (usually) | Sends status or progress update (no response expected) | ❌ No                   |
+
+
+📡 Transport Mechanisms
+
+| **Transport**       | **Use Case**            | **Details**                                                       |
+| ------------------- | ----------------------- | ----------------------------------------------------------------- |
+| **stdio**           | Local tools             | Client writes to stdin / reads from stdout of a subprocess        |
+| **HTTP + SSE**      | Remote/cloud services   | HTTP for requests; Server-Sent Events (SSE) for real-time updates |
+| **Streamable HTTP** | Hybrid / serverless use | Upgrades to SSE dynamically for streaming responses               |
+
+
+🔄 Interaction Lifecycle
+
+| **Phase**             | **Step**                 | **Message Flow**                                            |
+| --------------------- | ------------------------ | ----------------------------------------------------------- |
+| **1. Initialization** | Protocol negotiation     | `initialize →` / `← response` / `→ initialized`             |
+| **2. Discovery**      | List available tools     | `tools/list →` / `← response`                               |
+| **3. Execution**      | Execute tool method      | `tools/call →` / `← notification (optional)` / `← response` |
+| **4. Termination**    | Close connection cleanly | `shutdown →` / `← response` / `exit →`                      |
