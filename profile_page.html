@@ -1,0 +1,341 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>OnlyForStudents Profile</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet"/>
+  <style>
+    :root {
+      --primary: #0a0a4d;
+      --primary-grad: linear-gradient(90deg,#4f47ff,#a53aff);
+      --background: #f7f9fc;
+      --box: #fff;
+      --shadow: 0 4px 24px 0 rgb(10 10 77 / 0.10);
+      --border: #e3e8f0;
+    }
+    body { background: var(--background); font-family: "Segoe UI",Tahoma,Geneva,Verdana,sans-serif;}
+    .navbar { background: #fff; border-bottom: 1px solid #e8eaf3; box-shadow: 0 1px 8px #0a0a4d09;}
+    .navbar-brand { font-weight: 700; color: var(--primary); font-size: 1.25rem; letter-spacing: 0.01rem;}
+    .profile-img { width: 96px; height: 96px; object-fit: cover; border-radius: 0.65rem; box-shadow: 0 2px 10px #0a0a4d18;}
+    .online-dot { position: absolute; bottom: 10px; right: 10px; width: 15px; height: 15px; background: #18bb4b; border:2.5px solid #fff; border-radius: 50%; }
+    .progress-bar { background: var(--primary);}
+    .link-action { font-size: .93rem; color: var(--primary); font-weight: 500; text-decoration: none;}
+    .link-action:hover { text-decoration: underline; color: #080838;}
+    /* Tag badges */
+    .tech-badge {
+      font-size: 0.93rem; font-weight: 600; padding: 0.27em 0.8em; border-radius: 1.2rem;
+      display: inline-flex; align-items: center; gap: .35em; user-select: none;
+      background: #eaf0ff; color: #0a0a4d;
+      border: 1.5px solid #e3e8f0;
+      box-shadow: 0 1px 4px #4f47ff13;
+      transition: background .18s;
+    }
+    .tech-badge.react { background: #e3f0ff; color: #1a4dcc; border-color: #b2cafd;}
+    .tech-badge.node { background: #e7fae5; color: #15aa45; border-color: #b2f7c7;}
+    .tech-badge.figma { background: #fde6ff; color: #d13ccb; border-color: #f6bff8;}
+    .tech-badge.js { background: #fff7e3; color: #a87e13; border-color: #ffe7a5;}
+    .tech-badge.mongo { background: #ebf7f1; color: #26a069; border-color: #b2e7c7;}
+    .tech-badge.docker { background: #e6f4ff; color: #1386bf; border-color: #b4deff;}
+    .role-badge {
+      font-size: 0.91rem; font-weight: 600; padding: 0.22em 1.1em; border-radius: 1.2rem;
+      display: inline-flex; align-items: center; gap: 0.4em; user-select: none;
+      background: #fff; border: 1.7px solid #e3e8f0;
+      color: #fff;
+      background-image: var(--primary-grad);
+      box-shadow: 0 1px 4px #4f47ff15;
+    }
+    .role-badge.frontend { background-image: linear-gradient(90deg,#4f47ff 60%,#6ba4ff 100%); color: #fff;}
+    .role-badge.uiux    { background-image: linear-gradient(90deg,#a53aff 0%,#6756e9 100%); color:#fff;}
+    .role-badge.teamlead{ background-image: linear-gradient(90deg,#0a0a4d 0%,#3a85ff 100%); color:#fff;}
+    /* Info box */
+    .profile-main-box { background: var(--box); border-radius: 1.2rem; box-shadow: var(--shadow); padding: 2.3rem 2.1rem 2.0rem 2.1rem; }
+    .section-title { color: var(--primary); font-weight: 700; font-size: 1.12rem; margin-bottom: 1.1rem; }
+    /* Projects */
+    .project-card {
+      background: #f5f7fd;
+      border-radius: 1rem;
+      padding: 1.2rem 1.3rem 1.05rem 1.3rem;
+      margin-bottom: 1.05rem;
+      border-left: 5px solid var(--primary);
+      box-shadow: 0 2px 10px #0a0a4d0a;
+      transition: box-shadow .17s;
+    }
+    .project-card:last-child { margin-bottom: 0; }
+    .project-title { font-weight: 600; color: var(--primary);}
+    .project-meta { font-size: .93rem; color: #5e6580;}
+    .project-desc { margin-bottom: .3rem; color: #525b75; font-size: .98rem;}
+    .project-actions { margin-top: 0.3rem; }
+    /* Activity */
+    .activity-list { list-style: none; padding: 0; margin: 0;}
+    .activity-list li { display: flex; align-items: flex-start; gap: 10px; margin-bottom: 1.1rem;}
+    .activity-list li:last-child { margin-bottom: 0;}
+    .activity-icon { width: 26px; height: 26px; border-radius: 50%; background: #f1f3fe; display: flex; align-items: center; justify-content: center;}
+    /* Github-style mini badges */
+    .mini-badges-wrap {
+      display: flex;
+      gap: .45rem;
+      flex-wrap: wrap;
+    }
+    .mini-github-badge {
+      background: #fff;
+      border: 1.3px solid #e3e8f0;
+      border-radius: 7px;
+      padding: .21em .68em .21em .48em;
+      font-size: .91rem;
+      color: var(--primary);
+      font-weight: 500;
+      display: inline-flex;
+      align-items: center;
+      gap: .36em;
+      box-shadow: 0 1px 6px #4f47ff0c;
+      line-height: 1.13;
+      transition: background .13s;
+      user-select: none;
+      min-width: 0;
+    }
+    .mini-github-badge.react { border-color: #b2cafd; background: #eaf4ff; color: #1a4dcc;}
+    .mini-github-badge.github { border-color: #c8fbe5; background: #f6fdfb; color: #18bb4b;}
+    .mini-github-badge.team { border-color: #e9d1fa; background: #f9f3ff; color: #a354e3;}
+    .mini-github-badge.code { border-color: #ffe7a5; background: #fff9e7; color: #b97d09;}
+    .mini-github-badge .badge-icon {
+      width: 1.15em; height: 1.15em; margin-right: .13em; display:inline-flex; align-items:center; justify-content:center;
+    }
+    /* Skill test card */
+    .skilltest-card {
+      background: #f6f8ff;
+      border-radius: 1rem;
+      border: 1.5px solid #e1e6f5;
+      padding: 1.08rem 1.1rem 1.0rem 1.1rem;
+      margin-bottom: 1.05rem;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 1.2rem;
+      flex-wrap: wrap;
+    }
+    .skilltest-card:last-child { margin-bottom: 0; }
+    .skill-main { min-width: 140px;}
+    .skill-name { font-weight: 600; color: var(--primary);}
+    .skill-meta { font-size: .92rem; color: #6a6c83;}
+    .skill-label-passed {
+      background: #e2fbe8; color: #259c57; font-weight: 600; border-radius: 1rem; padding: 0.28em 0.9em; font-size: 0.86rem;
+    }
+    .skill-label-cooldown {
+      background: #fff7e2; color: #b1751a; font-weight: 600; border-radius: 1rem; padding: 0.28em 0.9em; font-size: 0.86rem;
+    }
+    .skilltest-date { color: #7a8194; font-size: .85rem; margin-top: .15rem;}
+    @media (max-width: 991.98px) {
+      .profile-main-box { padding: 1.4rem .7rem 1.2rem .7rem;}
+    }
+    @media (max-width: 767.98px) {
+      .btn-edit-profile { margin-top: 1rem; width: 100%; }
+      .profile-img { width: 80px; height: 80px;}
+      .profile-main-box { padding: 1rem .5rem .7rem .5rem;}
+    }
+    @media (max-width: 575.98px) {
+      .profile-img { width: 64px; height: 64px;}
+      .section-title { font-size: 1.03rem;}
+      .profile-main-box { border-radius: .9rem; }
+      .mini-github-badge { font-size:.89rem; padding:.19em .44em;}
+      .skilltest-card, .project-card { padding: .8rem .5rem .7rem .7rem;}
+    }
+  </style>
+</head>
+<body>
+  <nav class="navbar navbar-expand-lg px-3">
+    <a class="navbar-brand" href="#">OnlyForStudents</a>
+    <div class="ms-auto d-flex align-items-center gap-3">
+      <button type="button" class="btn btn-link p-0" aria-label="Notifications">
+        <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" fill="var(--primary)" viewBox="0 0 24 24"><path d="M12 24c1.104 0 2-.895 2-2h-4c0 1.105.896 2 2 2zm6-6v-5c0-3.071-1.638-5.637-4.5-6.32V6a1.5 1.5 0 1 0-3 0v.68C7.638 7.363 6 9.928 6 13v5l-2 1v1h16v-1l-2-1z"/></svg>
+      </button>
+      <button type="button" class="btn btn-link p-0" aria-label="Settings">
+        <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" fill="var(--primary)" viewBox="0 0 24 24"><path d="M12 8c-2.206 0-4 1.794-4 4s1.794 4 4 4c2.204 0 4-1.794 4-4s-1.796-4-4-4zm8.116 3.017l-1.568-.255a6.937 6.937 0 0 0-.78-1.462l1.08-1.36a.5.5 0 0 0-.13-.714l-2.278-1.61a.5.5 0 0 0-.71.131l-1.027 1.3a7.14 7.14 0 0 0-1.456-.819l-.263-1.498a.5.5 0 0 0-.497-.423h-3.575a.5.5 0 0 0-.498.423l-.26 1.485a7.045 7.045 0 0 0-1.461.819l-1.027-1.3a.5.5 0 0 0-.71-.131l-2.28 1.61a.5.5 0 0 0-.13.714l1.08 1.362a6.925 6.925 0 0 0-.78 1.464l-1.57.255a.5.5 0 0 0-.413.492v2.89a.5.5 0 0 0 .412.493l1.564.255a6.924 6.924 0 0 0 .783 1.457l-1.08 1.36a.5.5 0 0 0 .13.714l2.278 1.607a.5.5 0 0 0 .71-.133l1.027-1.296a7.095 7.095 0 0 0 1.455.818l.264 1.493a.5.5 0 0 0 .498.426h3.574a.5.5 0 0 0 .498-.426l.263-1.493a7.13 7.13 0 0 0 1.457-.818l1.027 1.296a.5.5 0 0 0 .71.133l2.279-1.607a.5.5 0 0 0 .132-.714l-1.08-1.36a6.93 6.93 0 0 0 .784-1.457l1.57-.255a.5.5 0 0 0 .41-.493v-2.889a.5.5 0 0 0-.409-.49z"/></svg>
+      </button>
+    </div>
+  </nav>
+
+  <main class="container py-4">
+    <div class="row align-items-center mb-4">
+      <div class="col-12 col-md-auto d-flex position-relative">
+        <img src="https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/36b134c2-3867-4ec2-b3df-667169155351.png" 
+             alt="Portrait of mature man with grey background, wearing glasses and green t-shirt" class="profile-img" />
+        <span class="online-dot"></span>
+      </div>
+      <div class="col-12 col-md flex-grow-1 ps-md-3 mt-3 mt-md-0">
+        <h2 class="mb-1 fw-bold" style="color:var(--primary);">Alex Thompson</h2>
+        <div class="mb-2 d-flex flex-wrap align-items-center gap-2">
+          <span class="tech-badge">Frontend Developer</span>
+          <span class="text-secondary small">Level 12 &bull; 2,450 XP</span>
+        </div>
+        <p class="mb-1 text-secondary small lh-sm">React Ninja | Computer Science @ MIT | Building the future, one component at a time</p>
+        <div class="mb-2 small text-secondary">
+          Progress to Level 13 <span class="fw-semibold text-dark ms-1">2,450 / 3,000 XP</span>
+        </div>
+        <div class="progress" style="height: 8px; border-radius: 4px;">
+          <div class="progress-bar" role="progressbar" style="width: 81.67%" aria-valuenow="2450" aria-valuemin="0" aria-valuemax="3000"></div>
+        </div>
+      </div>
+      <div class="col-12 col-md-auto mt-3 mt-md-0">
+        <button class="btn btn-primary btn-edit-profile">
+          <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-pencil-square me-2" viewBox="0 0 16 16">
+            <path d="M15.502 1.94a.5.5 0 0 1 0 .706L14.207 3.94l-2-2L13.502.646a.5.5 0 0 1 .707 0l1.293 1.293zm-1.75 2.456-2-2L4.939 9.21a.5.5 0 0 0-.121.196l-.805 2.414a.25.25 0 0 0 .316.316l2.414-.805a.5.5 0 0 0 .196-.12l6.813-6.814z"/>
+            <path fill-rule="evenodd" d="M1 13.5A1.5 1.5 0 0 0 2.5 15h11a1.5 1.5 0 0 0 1.5-1.5v-8a.5.5 0 0 0-1 0v8a.5.5 0 0 1-.5.5h-11a.5.5 0 0 1-.5-.5v-11a.5.5 0 0 1 .5-.5H9a.5.5 0 0 0 0-1H2.5A1.5 1.5 0 0 0 1 2.5v11z"/>
+          </svg>
+          Edit Profile
+        </button>
+      </div>
+    </div>
+
+    <div class="row g-4">
+      <div class="col-lg-8">
+        <div class="profile-main-box mb-4">
+          <div class="section-title mb-2">Tech Stack</div>
+          <div class="mb-3 d-flex flex-wrap gap-2">
+            <span class="tech-badge react">React</span>
+            <span class="tech-badge node">Node.js</span>
+            <span class="tech-badge figma">Figma</span>
+            <span class="tech-badge js">JavaScript</span>
+            <span class="tech-badge mongo">MongoDB</span>
+            <span class="tech-badge docker">Docker</span>
+          </div>
+          <div class="section-title mb-2">Expertise</div>
+          <div class="d-flex flex-wrap gap-2">
+            <span class="role-badge frontend">Frontend</span>
+            <span class="role-badge uiux">UI/UX</span>
+            <span class="role-badge teamlead">Team Lead</span>
+          </div>
+        </div>
+
+        <div class="profile-main-box mb-4">
+          <div class="section-title mb-2">Project Contributions</div>
+          <div class="project-card">
+            <div class="project-title mb-1">EcoTracker Mobile App</div>
+            <div class="project-meta mb-1">Frontend Developer &bull; Ongoing</div>
+            <div class="project-desc">React Native app for environmental impact tracking.</div>
+            <div class="project-actions d-flex gap-3">
+              <a href="#" class="link-action" aria-label="View GitHub Repository">GitHub</a>
+              <a href="#" class="link-action">View Project</a>
+            </div>
+          </div>
+          <div class="project-card">
+            <div class="project-title mb-1">StudyBuddy Platform</div>
+            <div class="project-meta mb-1">Full Stack Developer &bull; Completed</div>
+            <div class="project-desc">Collaborative study platform with real-time features.</div>
+            <div class="project-actions d-flex gap-3">
+              <a href="#" class="link-action" aria-label="View GitHub Repository">GitHub</a>
+              <a href="#" class="link-action">View Project</a>
+            </div>
+          </div>
+        </div>
+
+        <div class="profile-main-box mb-4">
+          <div class="section-title mb-2">Recent Activity</div>
+          <ul class="activity-list">
+            <li>
+              <span class="activity-icon">
+                <svg xmlns="http://www.w3.org/2000/svg" width="17" height="17" fill="#28a745" viewBox="0 0 16 16"><path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14zm-1-3l5-5-1-1-4 4-2-2-1 1 3 3z"/></svg>
+              </span>
+              <span>Earned <strong>React Pro</strong> badge</span>
+              <span class="ms-auto text-muted" style="font-size:0.825rem;">2 days ago</span>
+            </li>
+            <li>
+              <span class="activity-icon">
+                <svg xmlns="http://www.w3.org/2000/svg" width="17" height="17" fill="#2a77f4" viewBox="0 0 16 16"><path d="M8.21 1a.5.5 0 0 1 .389.188l6.868 8.55c.1.124.097.308-.007.428l-6.94 7.414a.5.5 0 0 1-.744-.668L13.963 10H2.009l3.08 4.21a.5.5 0 0 1-.78.62L.242 8.578a.5.5 0 0 1-.003-.63l7.798-9.03A.5.5 0 0 1 8.212 1z"/></svg>
+              </span>
+              <span>Joined <strong>EcoTracker Mobile App</strong> project</span>
+              <span class="ms-auto text-muted" style="font-size:0.825rem;">1 week ago</span>
+            </li>
+            <li>
+              <span class="activity-icon">
+                <svg xmlns="http://www.w3.org/2000/svg" width="17" height="17" fill="#a085d5" viewBox="0 0 16 16"><path d="M8 15a7 7 0 1 1 0-14 7 7 0 0 1 0 14zm2.707-7.707a1 1 0 0 0-1.414-1.414L7 8.586 5.707 7.293a1 1 0 0 0-1.414 1.414l2 2a1 1 0 0 0 1.414 0l4-4z"/></svg>
+              </span>
+              <span>Passed <strong>Advanced JavaScript</strong> skill test</span>
+              <span class="ms-auto text-muted" style="font-size:0.825rem;">2 weeks ago</span>
+            </li>
+          </ul>
+        </div>
+      </div>
+      <div class="col-lg-4">
+        <div class="profile-main-box mb-4">
+          <div class="section-title mb-3">Verified Badges</div>
+          <div class="mini-badges-wrap">
+            <span class="mini-github-badge react">
+              <span class="badge-icon">
+                <svg xmlns="http://www.w3.org/2000/svg" fill="#1a4dcc" width="17" height="17" viewBox="0 0 16 16"><circle cx="8" cy="8" r="7" fill="#eaf4ff"/><path d="M8 0c1.5 0 3.48 1.72 4.56 3.56.57.97.88 1.91.96 2.69.07.62.13 1.88-.65 2.41a1.706 1.706 0 0 1-1.59.12c-.49-.19-.91-.56-1.2-.99-.18-.26-.31-.57-.37-.9-.25-1.9-1-2.6-2.23-2.3-1.6.34-2.37 1.57-2.54 3.16-.11 1.18-.23 2.26-.56 3.18-.13.44-.28.8-.44 1.12-.4-.93-.01-1.6.28-2.31 1.67-3.81 3.36-6.45 6.57-6.45z"/></svg>
+              </span>
+              React Pro
+            </span>
+            <span class="mini-github-badge github">
+              <span class="badge-icon">
+                <svg xmlns="http://www.w3.org/2000/svg" fill="#18bb4b" width="16" height="16" viewBox="0 0 16 16"><circle cx="8" cy="8" r="7" fill="#f6fdfb"/><path d="M8 0C3.58 0 0 3.58 0 8a8 8 0 0 0 5.47 7.59c.4.07.55-.17.55-.38 0-.19 0-.82 0-1.5C4 13.68 3.3 12.7 3.3 12.7c-.36-.87-.88-1.1-.88-1.1-.72-.5.05-.5.05-.5.8.05 1.21.83 1.21.83.7 1.2 1.88.85 2.34.65.07-.52.26-.85.47-1.05-2.22-.25-4.55-1.11-4.55-4.9 0-1.08.39-1.96 1.03-2.69-.1-.26-.45-1.3.1-2.7 0 0 .9-.29 2.95 1.03a10.3 10.3 0 0 1 5.38 0c2.05-1.32 2.95-1.03 2.95-1.03.55 1.4.2 2.44.1 2.7.63.73 1.03 1.6 1.03 2.69 0 3.8-2.33 4.65-4.55 4.9.27.23.5.69.5 1.39 0 1.01 0 1.83 0 2.08 0 .21.15.46.55.38A8.01 8.01 0 0 0 16 8c0-4.42-3.58-8-8-8z"/></svg>
+              </span>
+              GitHub Expert
+            </span>
+            <span class="mini-github-badge team">
+              <span class="badge-icon">
+                <svg xmlns="http://www.w3.org/2000/svg" fill="#a354e3" width="16" height="16" viewBox="0 0 16 16"><circle cx="8" cy="8" r="7" fill="#f9f3ff"/><path d="M5.216 14A2.238 2.238 0 0 1 3 11.784c0-1.38 2.042-3.197 5.798-3.197s5.798 1.817 5.798 3.197A2.238 2.238 0 0 1 10.784 14H5.216zm2.966-7a5.53 5.53 0 0 0-4.898 2.163A3.27 3.27 0 0 0 3 11.784c0 1.22 1.66 2.76 4.182 2.857a1.77 1.77 0 0 1-.226-.984 1.743 1.743 0 0 1 1.984-1.704 1.743 1.743 0 0 1 1.084 3.027 1.516 1.516 0 0 0-1.004.8c1.636.052 3.09-.64 3.09-1.715a5.486 5.486 0 0 0-4.863-4.99zM10.75 4a3.25 3.25 0 1 0-5.5 0 3.25 3.25 0 0 0 5.5 0z"/></svg>
+              </span>
+              Team Player
+            </span>
+            <span class="mini-github-badge code">
+              <span class="badge-icon">
+                <svg xmlns="http://www.w3.org/2000/svg" fill="#b97d09" width="16" height="16" viewBox="0 0 16 16"><circle cx="8" cy="8" r="7" fill="#fff9e7"/><path d="M8.5 13a.5.5 0 0 0 0-1h-7V9h12v3h-7zM14.5 10h-2v-4h2v4zM7 5V3h2v2H7z"/></svg>
+              </span>
+              Code Master
+            </span>
+          </div>
+        </div>
+
+        <div class="profile-main-box mb-4">
+          <div class="section-title mb-3">Skill Tests &amp; Certificates</div>
+          <div class="skilltest-card">
+            <div class="skill-main">
+              <div class="skill-name">React Advanced</div>
+              <div class="skill-meta">Score: 95/100</div>
+              <a href="#" class="link-action small" aria-label="View React Advanced Certificate">View Certificate</a>
+            </div>
+            <div class="d-flex flex-column align-items-end">
+              <span class="skill-label-passed mb-1" aria-label="Passed label">Passed</span>
+              <span class="skilltest-date">Mar 15, 2024</span>
+            </div>
+          </div>
+          <div class="skilltest-card">
+            <div class="skill-main">
+              <div class="skill-name">JavaScript ES6+</div>
+              <div class="skill-meta">Score: 88/100</div>
+              <a href="#" class="link-action small" aria-label="View JavaScript ES6+ Certificate">View Certificate</a>
+            </div>
+            <div class="d-flex flex-column align-items-end">
+              <span class="skill-label-passed mb-1" aria-label="Passed label">Passed</span>
+              <span class="skilltest-date">Feb 20, 2024</span>
+            </div>
+          </div>
+          <div class="skilltest-card">
+            <div class="skill-main">
+              <div class="skill-name">React JS</div>
+              <div class="skill-meta">Score: 90/100</div>
+              <a href="#" class="link-action small" aria-label="View React js Certificate">View Certificate</a>
+            </div>
+            <div class="d-flex flex-column align-items-end">
+              <span class="skill-label-passed mb-1" aria-label="Passed label">Passed</span>
+              <span class="skilltest-date">June 02, 2024</span>
+            </div>
+          </div>
+          <div class="skilltest-card">
+            <div class="skill-main">
+              <div class="skill-name">Node.js Fundamentals</div>
+              <div class="skill-meta text-muted">On cooldown</div>
+            </div>
+            <div class="d-flex flex-column align-items-end">
+              <span class="skill-label-cooldown mb-1" aria-label="On cooldown label">Cooldown</span>
+              <span class="skilltest-date">Available in 3 days</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </main>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

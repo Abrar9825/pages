@@ -1,0 +1,267 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>React Skill Test</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" />
+  <style>
+    :root { --bs-primary: #0a0a4d; }
+    body {
+      background: #f6f8fa;
+      color: #1c2028;
+      font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+    }
+    /* HEADER CARD */
+    .quiz-header-card {
+      max-width: 600px;
+      margin: 36px auto 18px auto;
+      background: #fff;
+      border-radius: .8rem;
+      box-shadow: 0 2px 16px rgba(10,10,77,0.11);
+      padding: 1rem 1.3rem;
+    }
+    .quiz-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 0.8rem;
+      flex-wrap: wrap;
+    }
+    .quiz-header .logo {
+      background: var(--bs-primary);
+      border-radius: .5rem;
+      width: 32px; height: 32px;
+      display: flex; align-items: center; justify-content: center;
+      flex-shrink: 0;
+    }
+    .quiz-header .logo svg { width: 17px; height: 17px; fill: #fff;}
+    .quiz-header .meta {
+      flex: 1 1 auto;
+      margin-left: 10px;
+      min-width: 110px;
+    }
+    .quiz-header .meta .title {
+      font-weight: 600;
+      font-size: 1rem;
+      color: var(--bs-primary);
+      margin-bottom: 2px;
+    }
+    .quiz-header .meta .progress {
+      height: 0.35rem;
+      border-radius: 99px;
+      background: #e4e6ef;
+      margin-bottom: 3px;
+    }
+    .quiz-header .meta .progress-bar {
+      background: var(--bs-primary);
+    }
+    .quiz-header .meta .progress-label {
+      font-size: 0.93rem;
+      color: #444;
+      font-weight: 500;
+    }
+    .quiz-header .timer {
+      color: #f97316;
+      font-size: .98rem;
+      font-weight: 500;
+      display: flex; align-items: center; gap: .3rem;
+      white-space: nowrap;
+    }
+    .quiz-header .timer svg { width: 15px; height: 15px; fill: #f97316; }
+
+    /* QUIZ CARD */
+    .quiz-card {
+      background: #fff;
+      border-radius: .8rem;
+      box-shadow: 0 2px 16px rgba(10,10,77,0.11);
+      max-width: 600px;
+      margin: 0 auto 30px auto;
+      padding: 1.3rem 1.1rem 1.05rem 1.1rem;
+      position: relative;
+      min-height: 0;
+    }
+    .tag-row {
+      display: flex; gap: 0.5rem; align-items: center; margin-bottom: .5rem; font-size: .95rem;
+      flex-wrap: wrap;
+    }
+    .badge-react {
+      background: #e0ebff;
+      color: var(--bs-primary);
+      font-weight: 600;
+      border-radius: 1rem;
+      padding: .22rem .7rem;
+    }
+    .badge-level { color: #7a8194; }
+
+    .question-text {
+      font-weight: 600;
+      font-size: 1.05rem;
+      margin-bottom: 1rem;
+      line-height: 1.45;
+      max-width: 98%;
+    }
+    .answers {
+      display: flex; flex-direction: column; gap: .45rem; margin-bottom: .7rem;
+    }
+    .answer-option {
+      background: #f6f8fa;
+      padding: .58rem .9rem;
+      border-radius: .43rem;
+      cursor: pointer;
+      display: flex; align-items: center; gap: .7rem;
+      border: 1px solid transparent;
+      transition: background .18s, border .18s;
+      font-size: .97rem;
+      user-select: none;
+    }
+    .answer-option:hover, .answer-option:focus-within {
+      background: #e0e7ff;
+      border-color: var(--bs-primary);
+    }
+    .form-check-input { pointer-events: none; }
+    .answer-badge {
+      background: #d1d7e0;
+      color: #495057;
+      font-weight: 600;
+      border-radius: 50%;
+      width: 21px; height: 21px;
+      display: flex; align-items: center; justify-content: center;
+      font-size: .96rem;
+    }
+    .pagination-dots {
+      display: flex; justify-content: center; gap: 0.3rem; margin: 0.2rem 0 .7rem 0;
+      flex-wrap: wrap;
+    }
+    .pagination-dot {
+      width: 13px; height: 5px; border-radius: 7px;
+      background: #e8ebf5; cursor: pointer; transition: all .2s;
+    }
+    .pagination-dot.active {
+      background: var(--bs-primary); width: 18px;
+      box-shadow: 0 0 6px var(--bs-primary);
+    }
+    .pagination-dot.partial {
+      background: #7495f1; width: 16px; box-shadow: 0 0 4px #7495f1;
+    }
+    .nav-buttons {
+      display: flex; justify-content: space-between; gap: .4rem; margin-top: .1rem;
+      font-size: .96rem;
+      flex-wrap: wrap;
+    }
+    .btn-skip {
+      background: none; border: none; color: #4b5563; cursor: pointer; padding: 0; font-weight: 500;
+    }
+    .btn-skip:hover { text-decoration: underline; color: var(--bs-primary);}
+    .btn-next {
+      background: var(--bs-primary); border: none; color: #fff; border-radius: .4rem;
+      padding: .33rem .98rem; font-weight: 600; cursor: pointer; display: flex; align-items: center; gap: .3rem;
+      font-size: .98rem;
+      transition: background .2s;
+    }
+    .btn-next:hover { background: #06062a; }
+    .btn-next svg { width: 13px; height: 13px; fill: #fff; }
+
+    /* Responsive */
+    @media (max-width: 700px){
+      .quiz-header-card, .quiz-card { max-width: 98vw; }
+    }
+    @media (max-width: 520px){
+      .quiz-header-card, .quiz-card { padding: .85rem .4rem; }
+      .question-text { font-size: .92rem;}
+      .quiz-header { gap: .4rem;}
+      .quiz-header .meta { margin-left: 6px;}
+    }
+    @media (max-width: 410px){
+      .quiz-header-card, .quiz-card { padding: .55rem .1rem; }
+      .quiz-header .timer { font-size: .93rem;}
+      .question-text { font-size: .87rem;}
+    }
+  </style>
+</head>
+<body>
+  <!-- HEADER CARD -->
+  <div class="quiz-header-card">
+    <div class="quiz-header">
+      <div class="logo" aria-label="React logo">
+        <svg viewBox="0 0 256 262" xmlns="http://www.w3.org/2000/svg" role="img" aria-hidden="true" focusable="false">
+          <circle cx="128" cy="131.5" r="27" />
+          <g stroke="white" stroke-width="17" fill="none">
+            <ellipse rx="114" ry="48" cx="128" cy="131.5" />
+            <ellipse rx="114" ry="48" cx="128" cy="131.5" transform="rotate(60 128 131.5)" />
+            <ellipse rx="114" ry="48" cx="128" cy="131.5" transform="rotate(120 128 131.5)" />
+          </g>
+        </svg>
+      </div>
+      <div class="meta">
+        <div class="title">React Skill Test</div>
+        <div class="progress" role="progressbar" aria-valuemin="0" aria-valuemax="12" aria-valuenow="3">
+          <div class="progress-bar" style="width:25%"></div>
+        </div>
+        <div class="progress-label">Q3 of 12</div>
+      </div>
+      <div class="timer">
+        <svg xmlns="http://www.w3.org/2000/svg" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg>
+        12:48
+      </div>
+    </div>
+  </div>
+
+  <!-- QUIZ CONTENT CARD -->
+  <main class="quiz-card" role="main" aria-labelledby="questionTitle">
+    <div class="tag-row mb-2">
+      <span class="badge-react">React Hooks</span>
+      <span class="badge-level">· Intermediate</span>
+    </div>
+    <div class="question-text" id="questionTitle">
+      Which React Hook would you use to perform side effects in a functional component?
+    </div>
+    <div class="answers" role="radiogroup" aria-labelledby="questionTitle">
+      <label class="answer-option" tabindex="0">
+        <input class="form-check-input" type="radio" name="answer" value="A" aria-checked="false" />
+        <div class="answer-badge">A</div>
+        <span>useState()</span>
+      </label>
+      <label class="answer-option" tabindex="0">
+        <input class="form-check-input" type="radio" name="answer" value="B" aria-checked="false" />
+        <div class="answer-badge">B</div>
+        <span>useEffect()</span>
+      </label>
+      <label class="answer-option" tabindex="0">
+        <input class="form-check-input" type="radio" name="answer" value="C" aria-checked="false" />
+        <div class="answer-badge">C</div>
+        <span>useContext()</span>
+      </label>
+      <label class="answer-option" tabindex="0">
+        <input class="form-check-input" type="radio" name="answer" value="D" aria-checked="false" />
+        <div class="answer-badge">D</div>
+        <span>useReducer()</span>
+      </label>
+    </div>
+    <div class="pagination-dots">
+      <span class="pagination-dot active"></span>
+      <span class="pagination-dot partial" ></span>
+      <span class="pagination-dot partial"></span>
+      <span class="pagination-dot"></span>
+      <span class="pagination-dot"></span>
+      <span class="pagination-dot"></span>
+      <span class="pagination-dot"></span>
+      <span class="pagination-dot"></span>
+      <span class="pagination-dot"></span>
+      <span class="pagination-dot"></span>
+      <span class="pagination-dot"></span>
+      <span class="pagination-dot"></span>
+    </div>
+    <nav class="nav-buttons" aria-label="Test Navigation">
+      <button class="btn btn-link p-0" type="button" aria-label="Previous Question">
+        &larr; Previous
+      </button>
+      <button class="btn-skip" type="button" aria-label="Skip Question">Skip</button>
+      <button class="btn-next" type="button" aria-label="Next Question">
+        Next
+        <svg xmlns="http://www.w3.org/2000/svg" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14M13 5l7 7-7 7"/></svg>
+      </button>
+    </nav>
+  </main>
+</body>
+</html>

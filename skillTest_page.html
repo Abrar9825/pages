@@ -1,0 +1,348 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>React Skill Test - OnlyForStudents</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet"/>
+  <style>
+    :root {
+      --primary: #0a0a4d;
+      --primary-grad: linear-gradient(90deg, #4f47ff, #a53aff);
+      --badge-grad: linear-gradient(135deg, #6a5dff 0%, #4bc0f7 100%);
+      --background-light: #f9fafc;
+      --background-white: #fff;
+    }
+    body {
+      background: var(--background-light);
+      font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+      color: #232323;
+    }
+    .main-container {
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 28px 12px;
+    } 
+    .header-card {
+      background: var(--background-white);
+      border-radius: 14px;
+      box-shadow: 0 1px 6px rgba(10, 10, 77, 0.08);
+      padding: 12px 20px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 1rem;
+      margin-bottom: 36px;
+    }
+    .logo-icon {
+      background: var(--badge-grad);
+      border-radius: 8px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 38px; height: 38px;
+    }
+    .logo-icon svg { width: 20px; height: 20px; fill: #fff; }
+    .logo-title {
+      font-weight: 700;
+      font-size: 1.1rem;
+      color: var(--primary);
+      margin-left: 10px;
+      letter-spacing: 0.2px;
+      user-select: none;
+    }
+    .profile-circle {
+      width: 34px; height: 34px; border-radius: 50%; background: #d0d4db;
+    }
+
+    .card-flex {
+      display: flex;
+      gap: 2.5rem;
+      flex-wrap: wrap;
+      justify-content: center;
+    }
+    .left-section, .right-section {
+      flex: 1 1 360px;
+      min-width: 280px;
+      max-width: 460px;
+    }
+    /* Left section */
+    .react-icon-container {
+      width: 68px;
+      height: 68px;
+      border-radius: 14px;
+      background: linear-gradient(135deg, #35aee2, #3a85ff);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      box-shadow: 0 8px 16px rgba(58, 133, 255, 0.20);
+      margin-bottom: 22px;
+      margin-left: 2px;
+    }
+    .react-icon-container svg { width: 34px; height: 34px; fill: #fff; }
+    .badge-card {
+      background: linear-gradient(180deg, #f6f8ff, #ebf0ff);
+      border-radius: 16px;
+      box-shadow: 0 8px 24px rgba(10,10,77,.11);
+      padding: 16px 20px;
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      position: relative;
+      margin-bottom: 12px;
+    }
+    .badge-icon {
+      width: 38px; height: 38px; background: var(--badge-grad); border-radius: 8px;
+      display: flex; align-items: center; justify-content: center;
+    }
+    .badge-icon svg { width: 19px; height: 19px; fill: #fff;}
+    .badge-text { font-weight: 700; font-size: 1.09rem; color: var(--primary);}
+    .badge-subtitle { font-weight: 400; font-size: .94rem; color: #5e6580;}
+    .star-badge {
+      position: absolute; top: -10px; right: -7px;
+      background: #ff9a00;
+      width: 20px; height: 20px; border-radius: 50%;
+      box-shadow: 0 2px 8px #ffb23699;
+      display: flex; align-items: center; justify-content: center;
+    }
+    .star-badge svg { width: 11px; height: 11px; fill: #fff;}
+    .description {
+      font-size: 1rem;
+      font-weight: 400;
+      color: #232323;
+      line-height: 1.5;
+      margin-top: 10px;
+      margin-bottom: 0;
+    }
+    .bonus-box {
+      background: linear-gradient(90deg,#e0ffe9 60%,#fff6e0);
+      border-radius: 10px;
+      color: #276c4c;
+      font-size: .99rem;
+      font-weight: 500;
+      padding: 10px 12px;
+      margin: 0 0 7px 0;
+      box-shadow: 0 2px 14px #a53aff11;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      width: 100%;
+      max-width: 340px;
+    }
+    .bonus-box svg {
+      width: 18px; height: 18px; flex-shrink: 0; fill: #08b07d;
+    }
+    /* Right section */
+    .right-section {
+      background: var(--background-white);
+      border-radius: 24px;
+      box-shadow: 0 14px 40px rgba(10, 10, 77, 0.10);
+      padding: 28px 28px 34px 28px;
+      display: flex;
+      flex-direction: column;
+      gap: 22px;
+      min-width: 270px;
+    }
+    .right-section h2 {
+      font-weight: 700; font-size: 1.3rem; color: var(--primary); text-align: center; margin-bottom: 0;
+    }
+    .right-section .subtitle {
+      font-size: 1rem; color: #5e6580; text-align: center; margin-bottom: 14px; margin-top: 0;
+    }
+    .info-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(128px, 1fr));
+      gap: 13px 17px;
+      margin-bottom: 10px;
+    }
+    .info-card {
+      background: #f7faff;
+      border-radius: 10px;
+      padding: 11px 13px;
+      display: flex;
+      align-items: center;
+      gap: 11px;
+      box-shadow: 0 2px 6px rgba(58, 133, 255, 0.11);
+    }
+    .info-icon {
+      min-width: 30px; height: 30px; border-radius: 7px;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 1.12rem;
+    }
+    .info-icon.duration { background: #dbe9ff; color: #557ae0;}
+    .info-icon.questions { background: #dbffe7; color: #3da64a;}
+    .info-icon.passing { background: #f2e7ff; color: #9f75e9;}
+    .info-icon.cooldown { background: #fff1e7; color: #ff853c;}
+    .info-label { font-size: .92rem; color: #6c729d;}
+    .info-value { font-weight: 700; font-size: 1rem; color: #232323;}
+    .topics {
+      font-size: .93rem; color: #232323; margin-bottom: 10px; user-select: none; text-align: center;
+    }
+    .topic-tags {
+      display: flex; flex-wrap: wrap; gap: 7px; margin-top: 5px; justify-content: center;
+    }
+    .topic {
+      background: #dbe9ff; color: var(--primary); font-size: .78rem; font-weight: 600;
+      padding: 5px 13px; border-radius: 15px; user-select: none;
+    }
+    .start-test-btn {
+      background: var(--primary-grad);
+      color: #fff;
+      font-weight: 700;
+      font-size: 1.08rem;
+      padding: 12px 0;
+      border: none;
+      border-radius: 12px;
+      cursor: pointer;
+      box-shadow: 0 8px 16px rgba(79, 71, 255, 0.23);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 8px;
+      transition: background 0.3s;
+      user-select: none;
+      width: 100%;
+    }
+    .start-test-btn:hover,
+    .start-test-btn:focus {
+      background: linear-gradient(90deg, #a53aff, #4f47ff);
+      outline: none;
+    }
+    .arrow-right {
+      border: solid white;
+      border-width: 0 2.5px 2.5px 0;
+      display: inline-block;
+      padding: 3px;
+      transform: rotate(-45deg);
+      -webkit-transform: rotate(-45deg);
+    }
+    .bottom-text {
+      font-size: 0.85rem;
+      color: #5e6580;
+      text-align: center;
+      margin-top: 10px;
+    }
+    /* Responsive */
+    @media (max-width: 990px) {
+      .main-container { max-width: 100vw; }
+      .card-flex { flex-direction: column; gap: 2rem;}
+      .left-section, .right-section { max-width: 100vw;}
+      .right-section { margin: 0 auto;}
+    }
+    @media (max-width: 600px) {
+      .header-card { padding: 10px 8px; }
+      .main-container { padding: 16px 2px; }
+      .right-section { padding: 16px 7px 20px 7px; border-radius: 13px;}
+      .badge-card { padding: 10px 10px;}
+      .react-icon-container { width: 48px; height: 48px;}
+      .badge-icon { width: 28px; height: 28px;}
+      .badge-text { font-size: .99rem;}
+      .badge-subtitle { font-size: .86rem;}
+      .star-badge { width: 15px; height: 15px;}
+      .bonus-box { font-size: .92rem;}
+    }
+  </style>
+</head>
+<body>
+  <div class="header-card">
+    <div class="d-flex align-items-center">
+      <div class="logo-icon" aria-hidden="true">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 2a1 1 0 0 1 .832.445l7 10a1 1 0 0 1-.832 1.555h-14a1 1 0 0 1-.832-1.555l7-10A1 1 0 0 1 12 2zM12 9a3 3 0 1 0 0 6 3 3 0 0 0 0-6z"></path></svg>
+      </div>
+      <span class="logo-title">OnlyForStudents</span>
+    </div>
+    <div class="profile-circle" aria-label="User Profile Icon"></div>
+  </div>
+  <div class="main-container">
+    <div class="card-flex">
+      <!-- Left Section -->
+      <section class="left-section mb-4 mb-lg-0">
+        <div class="react-icon-container" aria-hidden="true">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><circle cx="12" cy="12" r="1.5" fill="white"></circle><g stroke="white" stroke-width="1.5" fill="none" stroke-linecap="round"><ellipse rx="6.5" ry="11" cx="12" cy="12" transform="rotate(30 12 12)"></ellipse><ellipse rx="6.5" ry="11" cx="12" cy="12" transform="rotate(-30 12 12)"></ellipse><ellipse rx="6.5" ry="11" cx="12" cy="12"></ellipse></g></svg>
+        </div>
+        <article class="badge-card" aria-label="React Developer Badge Details">
+          <div class="badge-icon" aria-hidden="true">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10" /><path fill="#fff" d="M12 6a6 6 0 0 1 6 6 6 6 0 1 1-6-6z"/></svg>
+          </div>
+          <div>
+            <div class="badge-text">React Developer Badge</div>
+            <div class="badge-subtitle">Verified Skill Certification</div>
+          </div>
+          <div class="star-badge" aria-hidden="true" title="Featured Badge">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 17.27l6.18 3.64-1.64-7.03L21 9.24l-7.19-.61L12 2 10.19 8.63 3 9.24l5.46 4.64-1.64 7.03z" /></svg>
+          </div>
+        </article>
+        <div class="bonus-box mt-2">
+          <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 20 20"><path d="M9.05 2.927c.3-.921 1.6-.921 1.9 0l1.2 3.674a1 1 0 0 0 .95.69h3.862c.969 0 1.371 1.24.588 1.81l-3.124 2.27a1 1 0 0 0-.364 1.118l1.2 3.674c.3.921-.755 1.688-1.538 1.118l-3.125-2.27a1 1 0 0 0-1.175 0l-3.125 2.27c-.783.57-1.838-.197-1.539-1.118l1.2-3.674a1 1 0 0 0-.364-1.118l-3.124-2.27c-.783-.57-.38-1.81.588-1.81h3.862a1 1 0 0 0 .95-.69l1.2-3.674z"/></svg>
+          <span>
+            <strong>What you’ll earn:</strong>&nbsp; Verified badge, shareable certificate,<br> and leaderboard placement!
+          </span>
+        </div>
+      </section>
+      <!-- Right Section -->
+      <section class="right-section" aria-label="React Skill Test Information">
+        <h2>React Skill Test</h2>
+        <p class="subtitle">Earn your verified React Developer Badge</p>
+        <div class="info-grid" role="list">
+          <div class="info-card" role="listitem">
+            <div class="info-icon duration" aria-hidden="true" title="Duration">
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"><path d="M12 7a1 1 0 1 1 0 2 1 1 0 0 1 0-2zm0-5a10 10 0 1 0 10 10A10 10 0 0 0 12 2zm0 18a8 8 0 1 1 8-8 8 8 0 0 1-8 8z"/><path d="M12 6v6h4"/></svg>
+            </div>
+            <div class="info-content">
+              <span class="info-label">Duration</span>
+              <span class="info-value">15 mins</span>
+            </div>
+          </div>
+          <div class="info-card" role="listitem">
+            <div class="info-icon questions" aria-hidden="true" title="Questions">
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2a10 10 0 1 0 10 10A10 10 0 0 0 12 2zm1 15h-2v-2h2zm1.07-7.75a2.25 2.25 0 1 0-3.14 3.19v1.06h-2v-1.5a3.75 3.75 0 1 1 5.16-5.3z"/></svg>
+            </div>
+            <div class="info-content">
+              <span class="info-label">Questions</span>
+              <span class="info-value">12</span>
+            </div>
+          </div>
+          <div class="info-card" role="listitem">
+            <div class="info-icon passing" aria-hidden="true" title="Passing Score">
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"><path d="M11 7h2v6h-2zm0 8h2v2h-2z"/></svg>
+            </div>
+            <div class="info-content">
+              <span class="info-label">Passing Score</span>
+              <span class="info-value">65%</span>
+            </div>
+          </div>
+          <div class="info-card" role="listitem">
+            <div class="info-icon cooldown" aria-hidden="true" title="Retry Cooldown">
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"><path d="M12 4v1a7 7 0 1 1-7 7H3a9 9 0 1 0 9-9z"/></svg>
+            </div>
+            <div class="info-content">
+              <span class="info-label">Retry Cooldown</span>
+              <span class="info-value">24h</span>
+            </div>
+          </div>
+        </div>
+        <div class="topics" aria-label="Topics Covered">
+          Topics Covered:
+          <div class="topic-tags" role="list">
+            <span class="topic" role="listitem" tabindex="0">JSX</span>
+            <span class="topic" role="listitem" tabindex="0">Hooks</span>
+            <span class="topic" role="listitem" tabindex="0">Props</span>
+            <span class="topic" role="listitem" tabindex="0">DOM</span>
+            <span class="topic" role="listitem" tabindex="0">State</span>
+          </div>
+        </div>
+        <button class="start-test-btn" type="button" aria-label="Start the React skill test now">
+          Start Test Now
+          <i class="arrow-right" aria-hidden="true"></i>
+        </button>
+        <p class="bottom-text">Already earned this badge? <a href="#" aria-label="View certificate">View certificate</a></p>
+      </section>
+    </div>
+  </div>
+  <script>
+    document.querySelector('.start-test-btn').addEventListener('click', () => {
+      alert('Starting the React Skill Test...');
+    });
+  </script>
+</body>
+</html>
