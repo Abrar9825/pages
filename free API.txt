@@ -1,0 +1,50 @@
+Priority: 1  
+Platform: Google AI Studio (Gemini)  
+Why Choose:
+- Zero cost, no credit card required.
+- Access to multiple Gemini APIs with free monthly quota resets:
+  - Generate Speech API (Text-to-Speech)
+  - Text Generation API (Gemini models)
+  - Image Generation API (limited quota)
+  - Speech-to-Text API (Audio Recognition)
+
+---
+
+Priority: 2  
+Platform: Hugging Face LLaMA 2  
+Why Choose:
+- Access open LLaMA 2 model weights via Hugging Face Spaces.
+- No credit card required.
+- Fair usage limits.
+- Easy integration and community support.
+
+---
+
+Priority: 3  
+Platform: GitHub Models Playground (GPT-4.1)  
+Why Choose:
+- Hosted playground using OpenAI GPT-4.1.
+- Free access with no credit card.
+- Good for development and testing.
+- Reliable for short sessions.
+
+---
+
+Priority: 4  
+Platform: Grok LLaMA API  
+Why Choose:
+- Combines OpenAI and LLaMA technologies.
+- Free tier available without card.
+- Ideal for conversational AI projects.
+- Limited usage quota but useful for prototyping.
+
+---
+
+Priority: 5  
+Platform: Meta LLaMA 2 (Self-hosted)  
+Why Choose:
+- Download and run LLaMA 2 weights locally or on your server.
+- Fully free, no vendor lock-in.
+- Unlimited use (only infra costs).
+- Requires setup and operational knowledge.
+

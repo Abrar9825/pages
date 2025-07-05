@@ -1,0 +1,180 @@
+1. Landing Dashboard (Public)
+
+* Header (Logo, Login/Signup)
+* Welcome Message
+* Call to Action Button (Join a Project / Explore)
+* Optional: Testimonials, Feature highlights
+* Footer (Links, Socials)
+
+
+
+2. Login / Signup Page
+
+Signup:
+
+* Full Name (Input)
+* Email (Input) unique
+* Password (Input)
+* — OR —
+* GitHub Login (Button)
+* Google Login (Button)
+* Create Account (Button)
+
+Login:
+
+* Email (Input)
+* Password (Input)
+* Forgot Password? (Link)
+* — OR —
+* GitHub Login (Button)
+* Google Login (Button)
+* Login (Button)
+
+
+
+ 3. Preferences Setup Page
+
+* Progress Bar (Profile Completion)
+* Select Roles (Frontend, Backend, UI/UX, etc.)
+* Experience Level (Dropdown)
+* Tech Stack (Filtered multi-select) based on role
+* Save & Continue (Button)
+
+
+
+ 4. Profile + Badge Page
+
+* Welcome Message (“Hi \[Name]”)
+* Avatar
+* Roles (From preferences)
+* Experience Level
+* Tech Stack
+* XP Level + Progress Bar
+* Total Projects Contributed
+* Badge Section (Earned / Locked)
+* Badge Tooltip (Date + Skill Name) badge details
+
+
+
+ 5. GitHub Auth Page
+
+* Title: “Connect GitHub to Continue”
+* Short Video or Image Explainer
+* CTA Button: “Connect GitHub”
+* Optional: Link to GitHub Setup Tutorial
+
+
+
+ 6. Project Create Page
+
+* Project Title (Input)
+* Short Description (Rich Text Edoitor)
+* Roles Needed (Multi-role entry with skill requirements per role)
+* For Each Role:
+
+  * Role Name (e.g., Backend)
+  * Number of People
+  * Required Skills (Checkbox / Chips)
+* Assign Self a Role (Dropdown)
+* Validate badge/skills for assigned role
+* If missing → Redirect to Skill Test
+* Create Project (Button)
+
+
+
+ 7. Project Join Page
+
+* List of Open Projects (Cards)
+* Search/Filter by Role, Tech Stack
+* Each Project Card:
+
+  * Title
+  * Leader
+  * Roles Needed
+  * “Apply” Button
+
+
+
+ 8. Skill Test Page
+
+* Role/Tech Displayed
+* One Question per Screen
+* Timer (Top)
+* Question (Text)
+* Options (Radio Buttons)
+* “Next” Button
+* Submit at Last Question
+
+
+
+ 9. Test Result Page
+
+* Result Message (Pass/Fail + Emoji)
+* Score (e.g., 7/10)
+* XP Awarded (if pass)
+* Badge Earned (if applicable)
+* Retry Option (after cooldown if fail)
+* “Go to Dashboard” Button
+
+
+
+ 10. Cooldown Page
+
+* Message: “You’ve reached your limit”
+* Countdown Timer (e.g., 23h 59m left)
+* Retry Date
+* Link to Tutorials
+
+
+
+ 11. Project Dashboard + Task Board
+
+* Project Title + Repo Link
+* Members List
+* Last Active (Status)
+* AI Suggested Modules (Expandable List)
+* Manual Module Add (Input + Button)
+* Task Board (To Do, In Progress, Done Columns)
+* Latest Commits Section
+* Chat / Discussion Panel
+
+
+
+ 12. Leaderboard + XP Page
+
+* XP Progress (User)
+* Global Leaderboard (Rank, Name, XP)
+* Filter by:
+
+  * Role
+  * Time Period (Weekly, Monthly)
+* Badges Earned List
+
+
+
+ 13. GitHub Tutorial Page
+
+* Video Embed (How to use GitHub)
+* Steps (Text with icons)
+* Button: “Retry GitHub Login”
+* Troubleshooting FAQ
+
+
+
+ 14. Project Application Page
+
+* Project Title
+* Role Applied For
+* Skills Needed
+* Status: “Skill Badge Required”
+* If badge missing → Trigger Test
+* If badge available → “Join Project” Button
+
+
+
+ 15. Error / Block Page
+
+* Error Type (e.g., Access Denied, Test Incomplete)
+* Message
+* Possible Fixes (e.g., “Take Skill Test”, “Login First”)
+* CTA Button: Go Back / Take Action
